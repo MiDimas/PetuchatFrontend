@@ -20,14 +20,22 @@ export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, Thun
             if (!response.data) {
                 throw new Error();
             }
-            if (!response.data.id){
+            if (!response.data.user){
+                throw new Error();
+            }
+            if (!response.data.access_token){
                 throw new Error();
             }
 
-            localStorage.setItem(USER_LOCALSTORAGE_KEY, response.data.id);
+            const user = response.data.user;
+            const access_token = response.data.access_token;
 
-            dispatch(userActions.setAuthData(response.data));
-            return response.data;
+            // localStorage.setItem(USER_LOCALSTORAGE_KEY, user.id);
+            // Пока оставлен токен в качестве пользователя
+            localStorage.setItem(USER_LOCALSTORAGE_KEY, access_token.token);
+            
+            dispatch(userActions.setAuthData(user));
+            return user;
         } catch {
             return rejectWithValue('error');
         }

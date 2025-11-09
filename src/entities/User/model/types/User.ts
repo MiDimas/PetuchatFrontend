@@ -4,11 +4,16 @@ import {JsonSettings} from './jsonSettings';
 
 export interface User {
     id: string;
-    username: string;
+    name: string;
     avatar?: string;
+    token?: string;
+    created_at?: string;
+    updated_at?: string;
+
     roles?: UserRole[];
     features?: FeatureFlags;
     jsonSettings?: JsonSettings;
+
 }
 
 export interface UserSchema {

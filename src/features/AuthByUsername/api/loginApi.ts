@@ -1,13 +1,16 @@
 import { rtkApi } from "@/shared/api/rtkApi";
+import { LoginResponse } from "../model/types/LoginSchema";
 
 interface LoginByUsernameProps {
     name: string;
     password: string;
 }
 
+
+
 const loginApi = rtkApi.injectEndpoints({
     endpoints: (build) => ({
-        login: build.mutation<any, LoginByUsernameProps>({
+        login: build.mutation<LoginResponse, LoginByUsernameProps>({
             query: (authData) => ({
                 url: '/users/login',
                 method: 'POST',

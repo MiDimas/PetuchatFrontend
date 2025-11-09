@@ -1,4 +1,4 @@
-import { memo, useCallback, ChangeEvent } from 'react';
+import { memo, useCallback, ChangeEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { classNames } from '@/shared/lib/classNames/classNames';
@@ -9,10 +9,8 @@ import {
 import { useAppDispatch } from '@/shared/lib/hooks/useAppDispatch/useAppDispatch';
 import { getLoginError } from '../../model/selectors/getLoginError/getLoginError';
 import { getLoginIsLoading } from '../../model/selectors/getLoginIsLoading/getLoginIsLoading';
-import { getLoginPassword } from '../../model/selectors/getLoginPassword/getLoginPassword';
-import { getLoginUsername } from '../../model/selectors/getLoginUsername/getLoginUsername';
 import { loginByUsername } from '../../model/services/LoginByUserName/LoginByUsername';
-import { loginActions, loginReducer } from '../../model/slice/loginSlice';
+import { loginReducer } from '../../model/slice/loginSlice';
 import cls from './LoginForm.module.scss';
 
 export interface LoginFormProps {
@@ -27,26 +25,26 @@ const initialReducers: ReducersList = {
 const LoginForm = memo((props: LoginFormProps) => {
     const { t } = useTranslation();
     const dispatch = useAppDispatch();
-    const username = useSelector(getLoginUsername);
-    const password = useSelector(getLoginPassword);
     const isLoading = useSelector(getLoginIsLoading);
     const error = useSelector(getLoginError);
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const { className, onSuccess } = props;
 
     const onChangeUsername = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value
-            dispatch(loginActions.setUsername(value));
+            setUsername(value);
         },
-        [dispatch],
+        [setUsername],
     );
     const onChangePassword = useCallback(
         (e: ChangeEvent<HTMLInputElement>) => {
             const value = e.target.value
-            dispatch(loginActions.setPassword(value));
+            setPassword(value);
         },
-        [dispatch],
+        [setPassword],
     );
     const onLoginClick = useCallback(async () => {
         const result = await dispatch(

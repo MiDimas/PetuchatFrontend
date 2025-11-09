@@ -35,7 +35,7 @@ export const NavbarLightLogged: Story = {
     decorators: [
         StoreDecorator({
             user: {
-                authData: { username: 'pet' },
+                authData: { name: 'pet' },
             },
         }),
     ],
@@ -45,7 +45,7 @@ export const NavbarDarkLogged: Story = {
         ThemeDecorator(Theme.DARK),
         StoreDecorator({
             user: {
-                authData: { username: 'pet' },
+                authData: { name: 'pet' },
             },
         }),
     ],

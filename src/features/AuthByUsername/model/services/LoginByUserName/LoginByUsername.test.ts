@@ -37,7 +37,7 @@ describe('Тестирование AsyncThunk LoginByUsename', () => {
 
     test('Успешная авторизация', async () => {
         const userValue = {
-            username: '123',
+            name: '123',
             id: '1',
         };
         const thunk = new TestAsyncThunk(loginByUsername);
