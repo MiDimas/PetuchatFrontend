@@ -5,6 +5,7 @@ import { AppRouter } from './providers/router';
 import './styles/index.scss';
 // import {ToggleFeatures, toggleFeatures} from "@/shared/lib/features";
 import {MainLayout} from "@/shared/layouts/MainLayout";
+import { Footer } from '@/widgets/Footer';
 
 function App() {
     const { theme } = useTheme();
@@ -23,7 +24,7 @@ function App() {
         <Suspense fallback="">
             <MainLayout
             content={<AppRouter />}
-            footer={<div></div>}
+            footer={<Footer/>}
             />
         </Suspense>
     );
