@@ -1,41 +1,30 @@
 .MainLayout {
     display: grid;
     min-height: 100%;
-    grid-template-areas: "sidebar content rightbar";
-    grid-template-columns: min-content 1fr 176px;
+    max-height: 100vh;
+    grid-template-areas:
+                         "content"
+                         "footer";
+    grid-template-columns: 100vw;
+    grid-template-rows: minmax(100px, 1fr) 50px;
     background-color: var(--bg);
-}
-
-.sidebar {
-    grid-area: sidebar;
-    justify-self: flex-start;
-    padding: 32px 0 32px 32px;
-    background-color: var(--bg);
-    color: var(--text);
-    max-width: 284px;
+    min-width: 100%;
+    gap: 10px;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .content {
     grid-area: content;
     max-width: 1200px;
+    height: 100%;
     width: 100%;
     padding: 32px;
     justify-self: center;
 }
 
-.rightbar {
-    grid-area: rightbar;
-}
-
-.header {
-    grid-area: header;
-}
-
-.toolbar {
-    grid-area: toolbar;
-    background-color: var(--light-bg);
-    color: var(--text);
-    margin-top: 16px;
-    padding: 16px;
-    border-radius: 16px 0 0 16px;
+.footer {
+    grid-area: footer;
+    background-color: var(--primary-el);
+    color: var(--invert-text);
 }

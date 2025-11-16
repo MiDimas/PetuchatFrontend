@@ -1,14 +1,11 @@
 import {Suspense, useCallback, useEffect} from 'react';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
-import { Navbar } from '@/widgets/Navbar';
-import { Sidebar } from '@/widgets/Sidebar';
 import { AppRouter } from './providers/router';
 import './styles/index.scss';
 // import {ToggleFeatures, toggleFeatures} from "@/shared/lib/features";
 import {MainLayout} from "@/shared/layouts/MainLayout";
 
-const hello = "hello";
 function App() {
     const { theme } = useTheme();
 
@@ -25,10 +22,8 @@ function App() {
     return (
         <Suspense fallback="">
             <MainLayout
-            header={<Navbar />}
             content={<AppRouter />}
-            sidebar={<Sidebar />}
-            toolbar={<div>{hello}</div>}
+            footer={<div></div>}
             />
         </Suspense>
     );
