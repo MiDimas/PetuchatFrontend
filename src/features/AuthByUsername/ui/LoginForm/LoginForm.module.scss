@@ -1,3 +1,17 @@
 .LoginForm {
     max-width: 300px;
+    display: grid;
+    gap: 10px;
+    justify-items: center;
 }
+
+.input {
+    width: 100%;
+    font-size: 20px;
+    height: 30px;
+}
+
+.btn {
+    padding: 5px 15px;
+}
+

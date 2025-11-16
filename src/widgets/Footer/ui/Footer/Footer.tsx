@@ -1,7 +1,8 @@
 import { classNames } from "@/shared/lib/classNames/classNames"
 import cls from "./Footer.module.scss"
 import { useSelector } from "react-redux"
-import { getFooterItems } from "../model/selectors/getFooterItems"
+import { getFooterItems } from "../../model/selectors/getFooterItems"
+import { FooterItem } from "../FooterItem/FooterItem"
 
 
 export const Footer = () => {
@@ -10,7 +11,7 @@ export const Footer = () => {
 
     return <div className={classNames(cls.footer)} role="navigation">
             {footerItemList.map((item) => (
-                <div key={item.path}>{item.text}</div>
+                <FooterItem key={item.path} item={item}/>
             ))}
 
     </div>

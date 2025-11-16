@@ -66,6 +66,7 @@ const LoginForm = memo((props: LoginFormProps) => {
                     <span>{t('Неправильный логин или пароль')}</span>
                 )}
                 <input
+                    className={cls.input}
                     type="text"
                     placeholder={t('Логин')}
                     autoFocus
@@ -73,12 +74,13 @@ const LoginForm = memo((props: LoginFormProps) => {
                     value={username}
                 />
                 <input
-                    type="text"
+                    className={cls.input}
+                    type="password"
                     placeholder={t('Пароль')}
                     onChange={onChangePassword}
                     value={password}
                 />
-                <button onClick={onLoginClick} disabled={isLoading}>
+                <button onClick={onLoginClick} disabled={isLoading} className={cls.btn}>
                     {t('Войти')}
                 </button>
             </div>
