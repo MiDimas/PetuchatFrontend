@@ -1,0 +1,13 @@
+.Btn {
+    border: none;
+    background-color: var(--primary-el);
+    color: var(--invert-text);
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 16px; 
+
+    &.disabled {
+        cursor: not-allowed;
+        background-color: var(--hint);
+    }
+}

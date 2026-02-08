@@ -1,0 +1,29 @@
+.Page {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-rows: 5fr 1fr;
+    height: 100vh;
+    padding: 20px;
+}
+
+.logo { 
+    text-align: center;
+}
+
+.bottomBlock {
+    display: grid;
+
+}
+
+.regBlock {
+    display: grid;
+    grid-auto-flow: column;
+    gap: 5px;
+}
+
+.link {
+    text-decoration: none;
+    font-weight: bold;
+    color: var(--text);
+}

@@ -12,6 +12,11 @@
     gap: 10px;
     justify-content: center;
     overflow: hidden;
+
+    &.offFooter {
+        grid-template-areas: "content";
+        grid-template-rows: 100%;
+    }
 }
 
 .content {

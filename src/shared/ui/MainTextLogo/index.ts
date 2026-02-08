@@ -1,0 +1,1 @@
+export {MainTextLogo} from "./MainTextLogo";

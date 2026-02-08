@@ -1,4 +1,5 @@
 import {Suspense, useCallback, useEffect} from 'react';
+import { useLocation } from 'react-router-dom';
 import { classNames } from '@/shared/lib/classNames/classNames';
 import { useTheme } from '@/shared/lib/hooks/useTheme/useTheme';
 import { AppRouter } from './providers/router';
@@ -9,6 +10,7 @@ import { Footer } from '@/widgets/Footer';
 
 function App() {
     const { theme } = useTheme();
+    const location = useLocation();
 
 
     // Навешивание темы на body
@@ -19,12 +21,16 @@ function App() {
         themeBody();
     }, [themeBody]);
 
+    // Пути, на которых не показываем футер
+    const noFooterPaths = ['/forbidden', '/auth', '/start'];
+    const shouldShowFooter = !noFooterPaths.includes(location.pathname) && location.pathname !== '*';
+
 
     return (
         <Suspense fallback="">
             <MainLayout
             content={<AppRouter />}
-            footer={<Footer/>}
+            footer={shouldShowFooter ? <Footer/> : undefined}
             />
         </Suspense>
     );
