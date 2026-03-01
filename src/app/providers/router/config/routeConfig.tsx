@@ -2,6 +2,7 @@ import { ForbiddenPage } from '@/pages/ForbiddenPage';
 import { MainPage } from '@/pages/MainPage';
 import { AuthPage } from '@/pages/AuthPage';
 import { NotFoundPage } from '@/pages/NotFoundPage';
+import { RegistrationPage } from '@/pages/RegistrationPage';
 
 import {
     AppRoutes,
@@ -9,9 +10,12 @@ import {
     getRouteMain,
     getAuthPage,
     getRouteStart,
+    getRouteRegistration,
+    getRouteLogout,
 } from '@/shared/const/router';
 import { AppRoutesProps } from '@/shared/types/router/router';
 import { StartPage } from '@/pages/StartPage';
+import { LogoutPage } from '@/pages/LogoutPage';
 
 export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     [AppRoutes.MAIN]: {
@@ -35,6 +39,15 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
         path: getAuthPage(),
         element: <AuthPage />,
 
+    },
+    [AppRoutes.REGISTRATION]: {
+        path: getRouteRegistration(),
+        element: <RegistrationPage />,
+
+    },
+    [AppRoutes.LOGOUT]: {
+        path: getRouteLogout(),
+        element: <LogoutPage />
     },
     [AppRoutes.FORBIDDEN]: {
         path: getRouteForbidden(),

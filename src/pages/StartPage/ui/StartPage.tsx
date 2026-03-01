@@ -5,6 +5,7 @@ import { MainTextLogo } from '@/shared/ui/MainTextLogo';
 import cls from "./StartPage.module.scss";
 import { Button } from '@/shared/ui/Button';
 import { Link } from 'react-router-dom';
+import { getRouteRegistration } from '@/shared/const/router';
 
 
 
@@ -20,7 +21,7 @@ const StartPage = memo(() => {
                     <span>
                         {t("Не являетесь участником?")}
                     </span>
-                    <Link  className={cls.link} to="#">{t("Регистрация")}</Link>
+                    <Link className={cls.link} to={getRouteRegistration()}>{t("Регистрация")}</Link>
                 </div>
             </div>
         </Page>

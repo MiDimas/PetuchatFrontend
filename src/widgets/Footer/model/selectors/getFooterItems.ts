@@ -1,7 +1,7 @@
 import { getUserAuthData } from "@/entities/User";
 import { createSelector } from "@reduxjs/toolkit";
 import { FooterItemType } from "../types/footer";
-import { getAuthPage, getRouteMain } from "@/shared/const/router";
+import { getAuthPage, getRouteLogout, getRouteMain } from "@/shared/const/router";
 import MainIcon from '@/shared/assets/icons/Home.svg';
 import UserIcon from '@/shared/assets/icons/User.svg';
 
@@ -15,7 +15,11 @@ export const getFooterItems = createSelector(getUserAuthData, (authData) => {
     ];
 
     if (authData) {
-        sidebarItems.push(
+        sidebarItems.push({
+            path: getRouteLogout(),
+            Icon: MainIcon,
+            text: 'Выйти'
+        }
             // можно добавить ссылки на страницы с авторизацией
         );
     }

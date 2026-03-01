@@ -23,9 +23,17 @@ const userApi = rtkApi.injectEndpoints({
                 url: `/users/${userId}`,
                 method: 'GET',
             })
+        }),
+        // Get current user by token
+        fetchCurrentUser: build.query<User, void>({
+            query: () => ({
+                url: '/users/me',
+                method: 'GET',
+            })
         })
     })
 })
 
 export const setJsonSettingsMutation = userApi.endpoints.setJsonSettings.initiate;
 export const uploadUserDataQuery = userApi.endpoints.uploadUserDataInStorage.initiate;
+export const fetchCurrentUserQuery = userApi.endpoints.fetchCurrentUser.initiate;

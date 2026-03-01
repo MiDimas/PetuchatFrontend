@@ -1,27 +1,38 @@
-import {createAsyncThunk} from "@reduxjs/toolkit";
-import {ThunkConfig} from "@/app/providers/StoreProvider";
-import {User} from "../types/User";
-import {uploadUserDataQuery} from '../../api/userApi'
-import {USER_LOCALSTORAGE_KEY} from "@/shared/const/localstorage";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { ThunkConfig } from '@/app/providers/StoreProvider';
+import { User } from '../types/User';
+import { fetchCurrentUserQuery } from '../../api/userApi';
+import { authStorage } from '@/shared/lib/auth/authStorage';
 
-export const loadUserData= createAsyncThunk<User,  undefined, ThunkConfig<string>>(
-    'articleDetails/fetchArticleById',
+export const loadUserData = createAsyncThunk<User | null, undefined, ThunkConfig<string>>(
+    'user/loadUserData',
     async (_, thunkAPI) => {
-        const {rejectWithValue, dispatch} = thunkAPI;
-        const  userId = localStorage.getItem(USER_LOCALSTORAGE_KEY);
-        console.log(userId);
+        const { rejectWithValue, dispatch } = thunkAPI;
+
+        // Check if token exists
+        const token = authStorage.getAccessToken();
+        console.log(token)
+        if (!token) {
+            return null;
+        }
+
+        // Check if token is expired
+        if (authStorage.isAccessTokenExpired()) {
+            console.log('Tokenexpirred')
+            authStorage.clear();
+            return null;
+        }
+
         try {
-            if (!userId) {
-                throw new Error('Вы не авторизованы');
-            }
-            const response = await dispatch(uploadUserDataQuery(userId)).unwrap();
-            if (!response) {
-                throw new Error('Такого пользователя нет');
-            }
+            console.log('Send requeset fetchcurrent user')
+            const response = await dispatch(fetchCurrentUserQuery()).unwrap();
+            console.log(response)
             return response;
         } catch (e) {
-            console.log(e);
-            return rejectWithValue('error');
+            console.log('error', e)
+            // Token might be invalid on server
+            authStorage.clear();
+            return rejectWithValue('Не удалось загрузить данные пользователя');
         }
     },
 );

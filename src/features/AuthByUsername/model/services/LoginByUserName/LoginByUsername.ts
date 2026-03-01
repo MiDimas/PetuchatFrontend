@@ -1,43 +1,44 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { ThunkConfig } from '@/app/providers/StoreProvider';
 import { User, userActions } from '@/entities/User';
-import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localstorage';
+import { authStorage } from '@/shared/lib/auth/authStorage';
 import { loginByUsernameMutation } from '../../../api/loginApi';
 
 interface LoginByUsernameProps {
     username: string;
     password: string;
 }
+
 export const loginByUsername = createAsyncThunk<User, LoginByUsernameProps, ThunkConfig<string>>(
     'common/loginByUserame',
     async (authData, thunkAPI) => {
         const { rejectWithValue, dispatch } = thunkAPI;
         try {
             const response = await dispatch(loginByUsernameMutation(
-                {name: authData.username, password: authData.password}
+                { name: authData.username, password: authData.password },
             ));
-            console.log(response);
+
             if (!response.data) {
                 throw new Error();
             }
-            if (!response.data.user){
+            if (!response.data.user) {
                 throw new Error();
             }
-            if (!response.data.access_token){
+            if (!response.data.access_token) {
                 throw new Error();
             }
 
-            const user = response.data.user;
-            const access_token = response.data.access_token;
+            const { user, access_token } = response.data;
 
-            // localStorage.setItem(USER_LOCALSTORAGE_KEY, user.id);
-            // Пока оставлен токен в качестве пользователя
-            localStorage.setItem(USER_LOCALSTORAGE_KEY, access_token.token);
-            
+            // Store token (expiration extracted from JWT automatically)
+            authStorage.set(access_token);
+
+            // Update Redux state with user data
             dispatch(userActions.setAuthData(user));
+
             return user;
         } catch {
-            return rejectWithValue('error');
+            return rejectWithValue('Неправильный логин или пароль');
         }
     },
 );

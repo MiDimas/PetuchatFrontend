@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { USER_LOCALSTORAGE_KEY } from '@/shared/const/localstorage';
 import { User, UserSchema } from '../types/User';
 import { setFeatureFlags } from '@/shared/lib/features';
 import {saveJsonSettings} from '../services/saveJsonSettings';
@@ -19,7 +18,7 @@ export const userSlice = createSlice({
         },
         logout: (state) => {
             state.authData = undefined;
-            localStorage.removeItem(USER_LOCALSTORAGE_KEY);
+            // localStorage is now handled by authStorage in logoutUser thunk
         },
     },
     extraReducers: (builder) => {
