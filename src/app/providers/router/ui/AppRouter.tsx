@@ -4,6 +4,7 @@ import { AppRoutesProps } from '@/shared/types/router/router';
 // import { PageLoader } from '@/widgets/PageLoader';
 import { routeConfig } from '../config/routeConfig';
 import { RequireAuth } from './RequireAuth';
+import { RequireUnAuth } from './RequireUnAuth';
 
 const AppRouter = () => {
     const renderWithWrapper = useCallback((route: AppRoutesProps) => {
@@ -17,7 +18,9 @@ const AppRouter = () => {
                     route.authOnly || route.roles ? (
                         <RequireAuth roles={route.roles}>{element}</RequireAuth>
                     ) : (
-                        element
+                        route.unauthOnly 
+                        ? (<RequireUnAuth>{element}</RequireUnAuth>)
+                        : element
                     )
                 }
             />

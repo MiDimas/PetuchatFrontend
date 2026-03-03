@@ -32,7 +32,10 @@ function App() {
     
     // если авторизация еще не проверена
     if (!isInitial) {
-        return <div>Loading...</div>;
+        return <MainLayout
+                content={<div>Loading...</div>}
+                footer={undefined}
+            />;
     }
 
     // Пути, на которых не показываем футер

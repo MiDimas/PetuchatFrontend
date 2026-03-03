@@ -26,6 +26,7 @@ export const routeConfig: Record<AppRoutes, AppRoutesProps> = {
     },
     [AppRoutes.START]: {
         path: getRouteStart(),
+        unauthOnly: true,
         element: <StartPage />,
 
     },
